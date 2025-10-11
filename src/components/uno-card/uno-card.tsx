@@ -1,11 +1,12 @@
+import type { CSSProperties } from "react";
 import type { UnoCardConfig } from "../../types";
 import { UnoCardIcon } from "./uno-card-icon";
 import "./uno-card.css";
 
-export function UnoCard({ config }: { config: UnoCardConfig }) {
+export function UnoCard({ config, size = 200 }: { config: UnoCardConfig, size?: number }) {
   const image = config.image || "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
   return (
-    <div className="uno-card-container" id={config.name} >
+    <div className="uno-card-container" id={config.name} style={{ "--size": `${size}px` } as CSSProperties}>
       <UnoCardIcon svg={config.icon()} position="top-left" />
       <UnoCardIcon svg={config.icon()} position="bottom-right" />
       <div className="uno-card-inner" style={{ backgroundColor: config.backgroundColor }}>

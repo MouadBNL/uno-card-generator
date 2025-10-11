@@ -10,7 +10,7 @@ import * as htmlToImage from 'html-to-image'
 
 export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
-  const [size, setSize] = useState<string>("200px");
+  const [size, setSize] = useState<number>(200);
   const [selectedCard, setSelectedCard] = useState<UnoCardConfig | null>(null)
 
   const setCardConfig = (card: UnoCardConfig) => {

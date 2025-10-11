@@ -4,6 +4,7 @@ import { useUnoCardEditorContext } from "./uno-card-context";
 import { FileUploadCard } from "../ui/file-upload-card";
 import { Label } from "../ui/label";
 import { useState } from "react";
+import { NumberArrowsInput } from "../ui/number-arrows-input";
 
 
 export function UnoCardConfigurator() {
@@ -14,9 +15,16 @@ export function UnoCardConfigurator() {
 
 
 export function UnoGlobalConfiguration() {
+  const { size, setSize } = useUnoCardEditorContext();
   return (
     <div>
-      <h1>Global Configuration</h1>
+      <h1 className="text-2xl font-bold mb-4">Global Configuration</h1>
+      <div className="grid grid-cols-1 gap-2">
+        <div>
+          <Label className="mb-2">Size</Label>
+          <NumberArrowsInput value={size} onChange={(value) => setSize(value)} min={100} />
+        </div>
+      </div>
     </div>
   )
 }
