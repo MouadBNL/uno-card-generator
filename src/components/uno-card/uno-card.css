@@ -1,5 +1,5 @@
 .uno-card-container {
-  --size: calc(400px);
+  --size: calc(600px);
   --width: var(--size);
   --height: calc(var(--size) * 1.6);
   width: var(--size);
@@ -7,7 +7,6 @@
   position: relative;
   border-radius: calc(var(--size) * 0.1);
   background-color: #eaeaec;
-  border: 1px solid black;
 }
 
 .uno-card-icon[data-position="top-left"] {
@@ -26,7 +25,15 @@
 }
 
 .uno-card-icon svg {
+  -webkit-filter: drop-shadow( calc(var(--size) * -0.0125) calc(var(--size) * 0.0125) 0px rgba(0, 0, 0, .7));
+  filter: drop-shadow( calc(var(--size) * -0.0125) calc(var(--size) * 0.0125) 0px rgba(0, 0, 0, 1));
   width: calc(var(--size) * 0.17);
+}
+.uno-card-icon svg path {
+  stroke: black;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  paint-order: stroke;
 }
 
 .uno-card-inner {
