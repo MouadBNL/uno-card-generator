@@ -1,5 +1,5 @@
 .uno-card-container {
-  --size: calc(600px);
+  --size: calc(200px);
   --width: var(--size);
   --height: calc(var(--size) * 1.6);
   width: var(--size);
