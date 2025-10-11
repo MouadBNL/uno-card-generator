@@ -22,6 +22,7 @@ function App() {
         {UnoSet.map((card) => (
           <div style={{ width: "10%" }} key={card.name}>
             <div>
+              <p>{card.name}</p>
               <button onClick={() => downloadCard(card.name)}>Download</button>
             </div>
             <UnoCard key={card.name} config={card} />
