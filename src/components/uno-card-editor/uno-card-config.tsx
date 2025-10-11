@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, Loader2Icon, SaveIcon } from "lucide-react";
+import { ArrowLeftIcon, Loader2Icon, SaveAllIcon, SaveIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useUnoCardEditorContext } from "./uno-card-context";
 import { FileUploadCard } from "../ui/file-upload-card";
@@ -15,10 +15,23 @@ export function UnoCardConfigurator() {
 
 
 export function UnoGlobalConfiguration() {
-  const { size, setSize } = useUnoCardEditorContext();
+  const { size, setSize, exportAllCards } = useUnoCardEditorContext();
+  const [loading, setLoading] = useState(false);
+  const onExport = async () => {
+    setLoading(true);
+    await exportAllCards();
+    setLoading(false);
+  }
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Global Configuration</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-xl font-bold">Global Config</h1>
+        <Button onClick={onExport} disabled={loading}>
+          {loading ? <Loader2Icon className="animate-spin" /> : <SaveAllIcon />}
+          Export All Cards
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 gap-2">
         <div>
           <Label className="mb-2">Size</Label>

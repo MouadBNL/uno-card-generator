@@ -6,7 +6,9 @@ import { UnoCardDisplay } from "./uno-card-display"
 import { UnoCardConfigurator } from "./uno-card-config"
 import { toast } from "sonner"
 import * as htmlToImage from 'html-to-image'
-
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
+import { dataUrlToBlob } from "@/lib/utils"
 
 export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
@@ -25,16 +27,24 @@ export function UnoCardEditor() {
     const element = document.getElementById(id) as HTMLElement
 
     const dataURI = await htmlToImage.toPng(element)
-    const link = document.createElement("a")
-    link.href = dataURI
-    link.download = `${card.name}.png`
-    link.click()
+    saveAs(dataURI, `${card.name}.png`)
 
     toast.success("Card exported")
   }
 
+  const exportAllCards = async () => {
+    const zip = new JSZip()
+    for (const card of cards) {
+      const element = document.getElementById(card.name) as HTMLElement
+      const dataURI = await htmlToImage.toPng(element)
+      zip.file(`${card.name}.png`, dataUrlToBlob(dataURI))
+    }
+    const content = await zip.generateAsync({ type: "blob" })
+    saveAs(content, "uno-cards.zip")
+  }
+
   return (
-    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard }}>
+    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard, exportAllCards }}>
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-[400px] overflow-y-auto border-r border-gray-300">
           <div className="p-4">
