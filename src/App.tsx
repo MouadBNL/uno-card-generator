@@ -1,3 +1,4 @@
+import { Button } from "./components/ui/button";
 import { UnoCard } from "./components/uno-card/uno-card"
 import { UnoSet } from "./constants/uno-set"
 import * as htmlToImage from 'html-to-image'
@@ -23,7 +24,7 @@ function App() {
           <div style={{ width: "10%" }} key={card.name}>
             <div>
               <p>{card.name}</p>
-              <button onClick={() => downloadCard(card.name)}>Download</button>
+              <Button onClick={() => downloadCard(card.name)}>Download</Button>
             </div>
             <UnoCard key={card.name} config={card} />
           </div>
