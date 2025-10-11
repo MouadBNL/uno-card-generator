@@ -1,0 +1,86 @@
+.uno-card-container {
+  --size: calc(200px);
+  --width: var(--size);
+  --height: calc(var(--size) * 1.6);
+  width: var(--size);
+  height: var(--height);
+  position: relative;
+  border-radius: calc(var(--size) * 0.1);
+  background-color: #eaeaec;
+  border: 1px solid black;
+}
+
+.uno-card-icon[data-position="top-left"] {
+  position: absolute;
+  top: calc(var(--size) * 0.09);
+  left: calc(var(--size) * 0.05);
+  z-index: 2;
+}
+
+.uno-card-icon[data-position="bottom-right"] {
+  position: absolute;
+  bottom: calc(var(--size) * 0.09);
+  right: calc(var(--size) * 0.05);
+  transform: rotate(180deg);
+  z-index: 2;
+}
+
+.uno-card-icon svg {
+  width: calc(var(--size) * 0.17);
+}
+
+.uno-card-inner {
+  position: absolute;
+  z-index: 1;
+  background: var(--uno-card-background-color);
+  top: calc(var(--size) * 0.07) ;
+  bottom: calc(var(--size) * 0.07) ;
+  left: calc(var(--size) * 0.04) ;
+  right: calc(var(--size) * 0.04) ;
+  border-radius: calc(var(--size) * 0.1);
+}
+
+.uno-card-ellipsis {
+  position: absolute;
+  z-index: 4;
+  height: 80%;
+  top: 50% ;
+  transform: translateY(-50%);
+  left: calc(var(--size) * 0.0) ;
+  right: calc(var(--size) * 0.0) ;
+  background-size: cover;
+  background-position: center;
+  clip-path: url(#ellipsis-path);
+}
+/* .uno-card-ellipsis {
+  position: absolute;
+  z-index: 3;
+  top: 50% ;
+  transform: translateY(-50%);
+  left: calc(var(--size) * 0.03) ;
+  right: calc(var(--size) * 0.03) ;
+} */
+
+.uno-card-content {
+  position: absolute;
+  z-index: 4;
+  height: 70%;
+  top: 50% ;
+  transform: translateY(-50%);
+  left: calc(var(--size) * 0.07) ;
+  right: calc(var(--size) * 0.07) ;
+  background-size: cover;
+  background-position: center;
+  clip-path: url(#ellipsis-path);
+}
+/* .uno-card-content {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--size) * 0.21) ;
+  bottom: calc(var(--size) * 0.21) ;
+  left: calc(var(--size) * 0.12) ;
+  right: calc(var(--size) * 0.12) ;
+  background-size: cover;
+  background-position: center;
+  clip-path: url(#ellipsis-path);
+} */
