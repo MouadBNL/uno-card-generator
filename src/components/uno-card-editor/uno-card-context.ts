@@ -9,6 +9,7 @@ export type UnoCardEditorContextType = {
   setSize: (size: string) => void;
   setSelectedCard: (card: UnoCardConfig | null) => void;
   setCardConfig: (card: UnoCardConfig) => void;
+  exportCard: (id: string) => void;
 };
 
 export const UnoCardEditorContext = createContext<UnoCardEditorContextType>({
@@ -19,6 +20,7 @@ export const UnoCardEditorContext = createContext<UnoCardEditorContextType>({
   setSize: () => {},
   setSelectedCard: () => {},
   setCardConfig: () => {},
+  exportCard: () => {},
 });
 
 export function useUnoCardEditorContext() {

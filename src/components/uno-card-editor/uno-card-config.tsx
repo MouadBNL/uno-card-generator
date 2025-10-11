@@ -1,8 +1,9 @@
-import { ArrowLeftIcon, SaveIcon } from "lucide-react";
+import { ArrowLeftIcon, Loader2Icon, SaveIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useUnoCardEditorContext } from "./uno-card-context";
 import { FileUploadCard } from "../ui/file-upload-card";
 import { Label } from "../ui/label";
+import { useState } from "react";
 
 
 export function UnoCardConfigurator() {
@@ -21,7 +22,8 @@ export function UnoGlobalConfiguration() {
 }
 
 export function UnoSingleCardConfiguration() {
-  const { selectedCard, setCardConfig, setSelectedCard } = useUnoCardEditorContext();
+  const { selectedCard, setCardConfig, setSelectedCard, exportCard } = useUnoCardEditorContext();
+  const [loading, setLoading] = useState(false);
   if (!selectedCard) return null;
 
   const onImageChange = (file: File | null) => {
@@ -37,6 +39,13 @@ export function UnoSingleCardConfiguration() {
     }
   }
 
+  const onExport = async () => {
+    setLoading(true);
+    await exportCard(selectedCard.name);
+    setLoading(false);
+  }
+
+
   return (
     <div key={selectedCard.name}>
       <div className="flex justify-between items-center mb-4">
@@ -45,13 +54,13 @@ export function UnoSingleCardConfiguration() {
         </Button>
 
         <span className="text-sm inline-block py-1 px-4 rounded-full bg-muted text-muted-foreground">#{selectedCard.name}</span>
-        <Button>
-          <SaveIcon />
+        <Button onClick={onExport} disabled={loading}>
+          {loading ? <Loader2Icon className="animate-spin" /> : <SaveIcon />}
           Export
         </Button>
       </div>
       <div className="grid grid-cols-1 gap-2">
-        <div>
+        <div key={selectedCard.image || "image"}>
           <Label className="mb-2">Card Image</Label>
           <FileUploadCard onChange={onImageChange} initalPreviewUrl={selectedCard.image || undefined} />
         </div>
