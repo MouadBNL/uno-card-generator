@@ -1,6 +1,8 @@
 import { ArrowLeftIcon, SaveIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useUnoCardEditorContext } from "./uno-card-context";
+import { FileUploadCard } from "../ui/file-upload-card";
+import { Label } from "../ui/label";
 
 
 export function UnoCardConfigurator() {
@@ -22,8 +24,7 @@ export function UnoSingleCardConfiguration() {
   const { selectedCard, setCardConfig, setSelectedCard } = useUnoCardEditorContext();
   if (!selectedCard) return null;
 
-  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const onImageChange = (file: File | null) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -31,6 +32,8 @@ export function UnoSingleCardConfiguration() {
         setCardConfig({ ...selectedCard, image: reader.result as string });
       }
       reader.readAsDataURL(file);
+    } else {
+      setCardConfig({ ...selectedCard, image: null });
     }
   }
 
@@ -47,8 +50,11 @@ export function UnoSingleCardConfiguration() {
           Export
         </Button>
       </div>
-      <div>
-        <input type="file" onChange={onImageChange} accept="image/*" />
+      <div className="grid grid-cols-1 gap-2">
+        <div>
+          <Label className="mb-2">Card Image</Label>
+          <FileUploadCard onChange={onImageChange} initalPreviewUrl={selectedCard.image || undefined} />
+        </div>
       </div>
     </div>
   )
