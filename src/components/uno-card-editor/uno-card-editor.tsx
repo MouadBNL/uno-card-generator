@@ -2,13 +2,14 @@ import { UnoSet } from "@/constants/uno-set"
 import type { UnoCardConfig } from "@/types"
 import { UnoCardEditorContext } from "./uno-card-context"
 import { useState, type CSSProperties } from "react"
-import { UnoCardDisplay } from "./uno-card-display"
+// import { UnoCardDisplay } from "./uno-card-display"
 import { UnoCardConfigurator } from "./uno-card-config"
 import { toast } from "sonner"
 import * as htmlToImage from 'html-to-image'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { dataUrlToBlob } from "@/lib/utils"
+import { UnoCardPrintView } from "./uno-card-print-view"
 
 export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
@@ -88,7 +89,8 @@ export function UnoCardEditor() {
         </aside>
         <div className="flex-1 bg-muted overflow-y-auto" style={style}>
           <div className="p-4">
-            <UnoCardDisplay />
+            {/* <UnoCardDisplay /> */}
+            <UnoCardPrintView />
           </div>
         </div>
       </div>
