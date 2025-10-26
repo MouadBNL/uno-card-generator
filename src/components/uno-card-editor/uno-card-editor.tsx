@@ -1,7 +1,7 @@
 import { UnoSet } from "@/constants/uno-set"
 import type { UnoCardConfig } from "@/types"
 import { UnoCardEditorContext } from "./uno-card-context"
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import { UnoCardDisplay } from "./uno-card-display"
 import { UnoCardConfigurator } from "./uno-card-config"
 import { toast } from "sonner"
@@ -14,6 +14,11 @@ export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
   const [size, setSize] = useState<number>(200);
   const [selectedCard, setSelectedCard] = useState<UnoCardConfig | null>(null)
+  const [red, setRed] = useState<string>("#af1d35")
+  const [blue, setBlue] = useState<string>("#065ba9")
+  const [green, setGreen] = useState<string>("#72aa2c")
+  const [yellow, setYellow] = useState<string>("#ead325")
+  const [black, setBlack] = useState<string>("#000000")
 
   const setCardConfig = (card: UnoCardConfig) => {
     setCards(cards.map((c) => c.name === card.name ? card : c))
@@ -43,15 +48,23 @@ export function UnoCardEditor() {
     saveAs(content, "uno-cards.zip")
   }
 
+  const style = {
+    "--uno-color-red": red,
+    "--uno-color-blue": blue,
+    "--uno-color-green": green,
+    "--uno-color-yellow": yellow,
+    "--uno-color-black": black,
+  } as CSSProperties
+
   return (
-    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard, exportAllCards }}>
+    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard, exportAllCards, colors: { red, blue, green, yellow, black, setRed, setBlue, setGreen, setYellow, setBlack } }}>
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-[400px] overflow-y-auto border-r border-gray-300">
           <div className="p-4">
             <UnoCardConfigurator />
           </div>
         </aside>
-        <div className="flex-1 bg-muted overflow-y-auto">
+        <div className="flex-1 bg-muted overflow-y-auto" style={style}>
           <div className="p-4">
             <UnoCardDisplay />
           </div>

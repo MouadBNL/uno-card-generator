@@ -5,6 +5,7 @@ import { FileUploadCard } from "../ui/file-upload-card";
 import { Label } from "../ui/label";
 import { useState } from "react";
 import { NumberArrowsInput } from "../ui/number-arrows-input";
+import { Input } from "../ui/input";
 
 
 export function UnoCardConfigurator() {
@@ -15,7 +16,7 @@ export function UnoCardConfigurator() {
 
 
 export function UnoGlobalConfiguration() {
-  const { size, setSize, exportAllCards } = useUnoCardEditorContext();
+  const { size, setSize, exportAllCards, colors } = useUnoCardEditorContext();
   const [loading, setLoading] = useState(false);
   const onExport = async () => {
     setLoading(true);
@@ -32,10 +33,33 @@ export function UnoGlobalConfiguration() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 gap-4">
         <div>
           <Label className="mb-2">Size</Label>
           <NumberArrowsInput value={size} onChange={(value) => setSize(value)} min={100} />
+        </div>
+        <div className="grid grid-cols-1 gap-1">
+          <Label className="text-base font-bold">Colors</Label>
+          <div className="flex gap-2 items-center">
+            <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Red</span>
+            <Input type="color" value={colors.red} onChange={(e) => colors.setRed(e.target.value)} />
+          </div>
+          <div className="flex gap-2 items-center">
+            <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Blue</span>
+            <Input type="color" value={colors.blue} onChange={(e) => colors.setBlue(e.target.value)} />
+          </div>
+          <div className="flex gap-2 items-center">
+            <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Green</span>
+            <Input type="color" value={colors.green} onChange={(e) => colors.setGreen(e.target.value)} />
+          </div>
+          <div className="flex gap-2 items-center">
+            <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Yellow</span>
+            <Input type="color" value={colors.yellow} onChange={(e) => colors.setYellow(e.target.value)} />
+          </div>
+          <div className="flex gap-2 items-center">
+            <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Black</span>
+            <Input type="color" value={colors.black} onChange={(e) => colors.setBlack(e.target.value)} />
+          </div>
         </div>
       </div>
     </div>
