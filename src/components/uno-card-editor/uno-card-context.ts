@@ -11,11 +11,6 @@ export type UnoCardEditorContextType = {
     green: string;
     yellow: string;
     black: string;
-    setRed: (color: string) => void;
-    setBlue: (color: string) => void;
-    setGreen: (color: string) => void;
-    setYellow: (color: string) => void;
-    setBlack: (color: string) => void;
   };
   setCards: (cards: UnoCardConfig[]) => void;
   setSize: (size: number) => void;
@@ -23,6 +18,10 @@ export type UnoCardEditorContextType = {
   setCardConfig: (card: UnoCardConfig) => void;
   exportCard: (id: string) => void;
   exportAllCards: () => void;
+  setColor: (
+    color: string,
+    key: "red" | "blue" | "green" | "yellow" | "black"
+  ) => void;
 };
 
 export const UnoCardEditorContext = createContext<UnoCardEditorContextType>({
@@ -41,12 +40,8 @@ export const UnoCardEditorContext = createContext<UnoCardEditorContextType>({
     green: "",
     yellow: "",
     black: "",
-    setRed: () => {},
-    setBlue: () => {},
-    setGreen: () => {},
-    setYellow: () => {},
-    setBlack: () => {},
   },
+  setColor: () => {},
 });
 
 export function useUnoCardEditorContext() {

@@ -14,11 +14,12 @@ export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
   const [size, setSize] = useState<number>(200);
   const [selectedCard, setSelectedCard] = useState<UnoCardConfig | null>(null)
-  const [red, setRed] = useState<string>("#af1d35")
-  const [blue, setBlue] = useState<string>("#065ba9")
-  const [green, setGreen] = useState<string>("#72aa2c")
-  const [yellow, setYellow] = useState<string>("#ead325")
-  const [black, setBlack] = useState<string>("#000000")
+  const [red, setRed] = useState<string>(localStorage.getItem("uno-color-red") || "#af1d35")
+  const [blue, setBlue] = useState<string>(localStorage.getItem("uno-color-blue") || "#065ba9")
+  const [green, setGreen] = useState<string>(localStorage.getItem("uno-color-green") || "#72aa2c")
+  const [yellow, setYellow] = useState<string>(localStorage.getItem("uno-color-yellow") || "#ead325")
+  const [black, setBlack] = useState<string>(localStorage.getItem("uno-color-black") || "#000000")
+
 
   const setCardConfig = (card: UnoCardConfig) => {
     setCards(cards.map((c) => c.name === card.name ? card : c))
@@ -56,8 +57,29 @@ export function UnoCardEditor() {
     "--uno-color-black": black,
   } as CSSProperties
 
+  const setColor = (color: string, key: "red" | "blue" | "green" | "yellow" | "black") => {
+    localStorage.setItem(`uno-color-${key}`, color);
+    switch (key) {
+      case "red":
+        setRed(color)
+        break
+      case "blue":
+        setBlue(color)
+        break
+      case "green":
+        setGreen(color)
+        break
+      case "yellow":
+        setYellow(color)
+        break
+      case "black":
+        setBlack(color)
+        break
+    }
+  }
+
   return (
-    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard, exportAllCards, colors: { red, blue, green, yellow, black, setRed, setBlue, setGreen, setYellow, setBlack } }}>
+    <UnoCardEditorContext.Provider value={{ cards, setCards, size, setSize, selectedCard, setSelectedCard, setCardConfig, exportCard, exportAllCards, colors: { red, blue, green, yellow, black }, setColor }}>
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-[400px] overflow-y-auto border-r border-gray-300">
           <div className="p-4">

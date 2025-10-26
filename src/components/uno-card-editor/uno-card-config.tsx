@@ -16,7 +16,7 @@ export function UnoCardConfigurator() {
 
 
 export function UnoGlobalConfiguration() {
-  const { size, setSize, exportAllCards, colors } = useUnoCardEditorContext();
+  const { size, setSize, exportAllCards, colors, setColor } = useUnoCardEditorContext();
   const [loading, setLoading] = useState(false);
   const onExport = async () => {
     setLoading(true);
@@ -42,23 +42,23 @@ export function UnoGlobalConfiguration() {
           <Label className="text-base font-bold">Colors</Label>
           <div className="flex gap-2 items-center">
             <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Red</span>
-            <Input type="color" value={colors.red} onChange={(e) => colors.setRed(e.target.value)} />
+            <Input type="color" value={colors.red} onChange={(e) => setColor(e.target.value, "red")} />
           </div>
           <div className="flex gap-2 items-center">
             <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Blue</span>
-            <Input type="color" value={colors.blue} onChange={(e) => colors.setBlue(e.target.value)} />
+            <Input type="color" value={colors.blue} onChange={(e) => setColor(e.target.value, "blue")} />
           </div>
           <div className="flex gap-2 items-center">
             <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Green</span>
-            <Input type="color" value={colors.green} onChange={(e) => colors.setGreen(e.target.value)} />
+            <Input type="color" value={colors.green} onChange={(e) => setColor(e.target.value, "green")} />
           </div>
           <div className="flex gap-2 items-center">
             <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Yellow</span>
-            <Input type="color" value={colors.yellow} onChange={(e) => colors.setYellow(e.target.value)} />
+            <Input type="color" value={colors.yellow} onChange={(e) => setColor(e.target.value, "yellow")} />
           </div>
           <div className="flex gap-2 items-center">
             <span className="text-sm block whitespace-nowrap w-12 shrink-0 ">Black</span>
-            <Input type="color" value={colors.black} onChange={(e) => colors.setBlack(e.target.value)} />
+            <Input type="color" value={colors.black} onChange={(e) => setColor(e.target.value, "black")} />
           </div>
         </div>
       </div>
