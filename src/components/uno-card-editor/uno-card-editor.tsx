@@ -4,24 +4,25 @@ import { UnoCardEditorContext } from "./uno-card-context"
 import { useState, type CSSProperties } from "react"
 import { UnoCardConfigurator } from "./uno-card-config"
 import { UnoCardPdfView } from "./uno-card-pdf-view"
+import { useStorageState } from "@/hooks/use-storage-state"
 
 export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
   const [selectedCard, setSelectedCard] = useState<UnoCardConfig | null>(null)
-  const [red, setRed] = useState<string>(localStorage.getItem("uno-color-red") || "#af1d35")
-  const [blue, setBlue] = useState<string>(localStorage.getItem("uno-color-blue") || "#065ba9")
-  const [green, setGreen] = useState<string>(localStorage.getItem("uno-color-green") || "#72aa2c")
-  const [yellow, setYellow] = useState<string>(localStorage.getItem("uno-color-yellow") || "#ead325")
-  const [black, setBlack] = useState<string>(localStorage.getItem("uno-color-black") || "#000000")
+  const [red, setRed] = useStorageState("#af1d35", "uno-color-red")
+  const [blue, setBlue] = useStorageState("#065ba9", "uno-color-blue")
+  const [green, setGreen] = useStorageState("#72aa2c", "uno-color-green")
+  const [yellow, setYellow] = useStorageState("#ead325", "uno-color-yellow")
+  const [black, setBlack] = useStorageState("#000000", "uno-color-black")
 
-  const [pageWidth, setPageWidth] = useState<number>(32);
-  const [pageHeight, setPageHeight] = useState<number>(45);
-  const [pagePadding, setPagePadding] = useState<number>(1);
-  const [pageRows, setPageRows] = useState<number>(5);
-  const [pageColumns, setPageColumns] = useState<number>(5);
+  const [pageWidth, setPageWidth] = useStorageState(32, "uno-page-number");
+  const [pageHeight, setPageHeight] = useStorageState(45, "uno-page-height");
+  const [pagePadding, setPagePadding] = useStorageState(1, "uno-page-padding");
+  const [pageRows, setPageRows] = useStorageState(5, "uno-page-rows");
+  const [pageColumns, setPageColumns] = useStorageState(5, "uno-page-cols");
 
-  const [cardWidth, setCardWidth] = useState<number>(5.5);
-  const [cardHeight, setCardHeight] = useState<number>(8.5);
+  const [cardWidth, setCardWidth] = useStorageState(5.5, "uno-card-width");
+  const [cardHeight, setCardHeight] = useStorageState(8.5, "uno-card-height");
 
 
   const setCardConfig = (card: UnoCardConfig) => {
