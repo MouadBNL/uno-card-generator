@@ -22,3 +22,9 @@ export function dataUrlToBlob(dataurl: string) {
     return new Blob([raw], { type: mime });
   }
 }
+
+export function cmToPx(cm: number) {
+  const dpi = 96; // standard CSS DPI
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  return cm * (dpi / 2.54) * devicePixelRatio;
+}

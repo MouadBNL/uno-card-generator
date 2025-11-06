@@ -10,6 +10,8 @@ import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { dataUrlToBlob } from "@/lib/utils"
 import { UnoCardPrintView } from "./uno-card-print-view"
+import html2pdf from "html2pdf.js"
+import { Button } from "../ui/button"
 
 export function UnoCardEditor() {
   const [cards, setCards] = useState<UnoCardConfig[]>(UnoSet)
@@ -50,6 +52,18 @@ export function UnoCardEditor() {
     saveAs(content, "uno-cards.zip")
   }
 
+  const exportPrint = async () => {
+    const el = document.getElementById("printing-view");
+    if (el == null) return;
+    await html2pdf().set({
+      enableLinks: true,
+      jsPDF: {
+        // format: [cmToPx(32), cmToPx(45)]
+        format: [645 / 2, 1700 / 4]
+      }
+    }).from(el).toImg().toPdf().save();
+  }
+
   const style = {
     "--uno-color-red": red,
     "--uno-color-blue": blue,
@@ -84,13 +98,15 @@ export function UnoCardEditor() {
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-[400px] overflow-y-auto border-r border-gray-300">
           <div className="p-4">
+            <Button onClick={exportPrint}>export</Button>
             <UnoCardConfigurator />
           </div>
         </aside>
         <div className="flex-1 bg-muted overflow-y-auto" style={style}>
           <div className="p-4">
             {/* <UnoCardDisplay /> */}
-            <UnoCardPrintView />
+            <UnoCardPrintView colorStyles={style} />
+
           </div>
         </div>
       </div>
