@@ -3,10 +3,16 @@ import type { UnoCardConfig } from "../../types";
 import { UnoCardIcon } from "./uno-card-icon";
 import "./uno-card.css";
 
-export function UnoCard({ config, size = 200 }: { config: UnoCardConfig, size?: number }) {
+export function UnoCard({ config, width = '200px', height = '300px' }: { config: UnoCardConfig, width?: string, height?: string }) {
   const image = config.image || "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
+
+  const cardStyle = {
+    width,
+    height
+  } satisfies CSSProperties;
+
   return (
-    <div className="uno-card-container" id={config.name} style={{ "--size": `${size}px` } as CSSProperties}>
+    <div className="uno-card-container" id={config.name} style={cardStyle}>
       <UnoCardIcon svg={config.icon()} position="top-left" />
       <UnoCardIcon svg={config.icon()} position="bottom-right" />
       <div className="uno-card-inner" style={{ backgroundColor: config.backgroundColor }}>

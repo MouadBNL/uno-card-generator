@@ -16,6 +16,7 @@ export function UnoCardPrintView({ colorStyles }: { colorStyles: CSSProperties }
   const pageStyle = {
     "width": "32cm",
     "height": "45cm",
+    "overflow": "hidden",
     "backgroundColor": "#FFF",
   } satisfies CSSProperties
   return (
@@ -25,7 +26,6 @@ export function UnoCardPrintView({ colorStyles }: { colorStyles: CSSProperties }
         <div className="grid gap-[1px] bg-black p-[1px] grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
           {cards.map((card, i) => (
             <>
-
               {(i > 0 && i % 20 == 0) && <div className="html2pdf__page-break w-full col-span-full"></div>}
               <div
                 key={card.name}

@@ -35,6 +35,9 @@ importers:
       html2pdf.js:
         specifier: ^0.12.1
         version: 0.12.1
+      jspdf:
+        specifier: ^3.0.3
+        version: 3.0.3
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
